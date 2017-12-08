@@ -1,0 +1,29 @@
+{
+  "name": "messages",
+  "version": "0.1.0",
+  "description": "An iMessage-like application that allows you to read and reply to text messages from Android phones using a TCP connection.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-tp/messages.git"
+  },
+  "keywords": [
+    "Android",
+    "Electron",
+    "iMessage",
+    "TCP"
+  ],
+  "author": "Erik van der Sar",
+  "license": "LGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/dev-tp/messages/issues"
+  },
+  "homepage": "https://github.com/dev-tp/messages#readme",
+  "dependencies": {
+    "electron": "^1.7.9"
+  }
+}
