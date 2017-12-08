@@ -1,0 +1,6 @@
+.DS_Store
+.vscode
+node_modules
+
+# Remove when other depencies other than electron are introduced
+package-lock.json
