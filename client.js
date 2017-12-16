@@ -2,41 +2,39 @@ const net = require('net');
 
 const client = new net.Socket();
 
-const messageInputBox = document.getElementById('input-message');
-const messagesDom = document.getElementById('messages');
-const sendMessageButton = document.getElementById('send-message-button');
+const threadsDom = document.getElementById('threads');
 
-function sendMessage() {
-  const messageDom = document.createElement('p');
-
-  messageDom.innerText = 'Me: ' + messageInputBox.value;
-  messagesDom.appendChild(messageDom);
-
-  client.write(messageInputBox.value);
-
-  messageInputBox.value = '';
-}
+let database = null;
+let segments = [];
 
 client.connect(1337, '127.0.0.1', function () {
   console.log('Client connected to server');
 });
 
 client.on('data', function (data) {
-  const messageDom = document.createElement('p');
+  const segment = data.toString();
 
-  messageDom.innerText = 'Received: ' + data.toString();
+  segments.push(segment);
 
-  messagesDom.appendChild(messageDom);
+  if (segment.endsWith('\n')) {
+    if (!database) {
+      database = JSON.parse(segments.join(''));
+      segments = [];
+
+      console.log('Loading view');
+
+      Object.keys(database).forEach(function (key) {
+        const paragraphDom = document.createElement('p');
+
+        const threadDom = document.createElement('a');
+        threadDom.innerText = database[key].recipients.join(', ');
+        threadDom.href = 'index.html?thread=' + key;
+
+        paragraphDom.appendChild(threadDom);
+        threadsDom.appendChild(paragraphDom);
+      });
+    }
+  }
 });
 
 client.on('error', console.log);
-
-messageInputBox.onkeypress = function (event) {
-  const code = event.keyCode || event.which;
-
-  if (code == '13') {
-    sendMessage();
-  }
-};
-
-sendMessageButton.onclick = sendMessage;
