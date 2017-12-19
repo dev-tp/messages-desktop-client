@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+}
+
+.date {
+  padding-right: 20px;
+  text-align: end;
+}
+
+.message, .message-author {
+  clear: both;
+  float: left;
+  margin: 10px 0;
+  width: 40%;
+}
+
+.message-author {
+  float: right;
+}
+
+.message-date {
+  text-align: end;
+}
+
+#composed-message {
+  max-height: 70px;
+  max-width: 90%;
+  min-height: 70px;
+  min-width: 60%;
+  vertical-align: middle;
+  width: 80%;
+}
+
+#composition-area {
+  bottom: 0;
+  height: 80px;
+  position: fixed;
+  width: 60%;
+}
+
+#message-container {
+  bottom: 0;
+  margin-bottom: 80px;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  width: 60%;
+}
+
+#messages {
+  float: right;
+  width: 60%;
+}
+
+#send-button {
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+#threads {
+  bottom: 0;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  width: 40%;
+}
