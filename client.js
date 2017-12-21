@@ -41,11 +41,25 @@ client.on('data', function (data) {
         dateDom.classList.add('date');
         dateDom.innerText = lastMessage.date;
 
+        threadDom.date = lastMessage.date;
+
         threadDom.appendChild(recipientsDom);
         threadDom.appendChild(messagePreviewDom);
         threadDom.appendChild(dateDom);
 
         threadsDom.appendChild(threadDom);
+      });
+
+      const nodes = Array.prototype.slice.call(threadsDom.childNodes, 0);
+
+      nodes.sort(function (a, b) {
+        return b.date - a.date;
+      });
+
+      threadsDom.innerHTML = '';
+
+      nodes.forEach(function (node) {
+        threadsDom.appendChild(node);
       });
     }
   }
