@@ -2,8 +2,6 @@ const net = require('net');
 
 const client = new net.Socket();
 
-const threadsDom = document.getElementById('threads');
-
 let database = null;
 let segments = [];
 
@@ -21,17 +19,33 @@ client.on('data', function (data) {
       database = JSON.parse(segments.join(''));
       segments = [];
 
-      console.log('Loading view');
+      const threadsDom = document.getElementById('threads');
 
       Object.keys(database).forEach(function (key) {
-        const paragraphDom = document.createElement('p');
+        const threadDom = document.createElement('div');
+        threadDom.classList.add('thread');
+        threadDom.id = key;
 
-        const threadDom = document.createElement('a');
-        threadDom.innerText = database[key].recipients.join(', ');
-        threadDom.href = 'index.html?thread=' + key;
+        const recipientsDom = document.createElement('h1');
+        recipientsDom.classList.add('recipients');
+        recipientsDom.innerText = database[key].recipients.join(', ');
 
-        paragraphDom.appendChild(threadDom);
-        threadsDom.appendChild(paragraphDom);
+        const lastMessageIndex = database[key].messages.length - 1;
+        const lastMessage = database[key].messages[lastMessageIndex];
+
+        const messagePreviewDom = document.createElement('h2');
+        messagePreviewDom.classList.add('message-preview');
+        messagePreviewDom.innerText = lastMessage.body;
+
+        const dateDom = document.createElement('p');
+        dateDom.classList.add('date');
+        dateDom.innerText = lastMessage.date;
+
+        threadDom.appendChild(recipientsDom);
+        threadDom.appendChild(messagePreviewDom);
+        threadDom.appendChild(dateDom);
+
+        threadsDom.appendChild(threadDom);
       });
     }
   }
