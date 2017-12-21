@@ -35,7 +35,7 @@ client.on('data', function (data) {
 
         const messagePreviewDom = document.createElement('h2');
         messagePreviewDom.classList.add('message-preview');
-        messagePreviewDom.innerText = lastMessage.body;
+        messagePreviewDom.innerText = lastMessage.body.split('\n')[0];
 
         const dateDom = document.createElement('p');
         dateDom.classList.add('date');
