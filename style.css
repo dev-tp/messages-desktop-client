@@ -48,6 +48,7 @@
 #message-container {
   bottom: 0;
   margin-bottom: 80px;
+  overflow-x: hidden;
   overflow-y: auto;
   position: fixed;
   top: 0;

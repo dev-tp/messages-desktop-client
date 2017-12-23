@@ -74,6 +74,35 @@ client.on('data', function (data) {
 
         threadDom.date = lastMessage.date;
 
+        threadDom.onclick = function () {
+          const date = new Date();
+
+          const messagesDom = document.getElementById('message-container');
+          messagesDom.innerHTML = '';
+
+          database[this.id].messages.forEach(function (message) {
+            const messageDom = document.createElement('div');
+            messageDom.classList.add('message');
+
+            if (!message.address) {
+              messageDom.classList.add('message-author');
+            }
+
+            const bodyDom = document.createElement('p');
+            bodyDom.classList.add('message-body');
+            bodyDom.innerText = message.body;
+
+            const dateDom = document.createElement('p');
+            dateDom.classList.add('message-date');
+            dateDom.innerText = getReadableDate(date, message.date);
+
+            messageDom.appendChild(bodyDom);
+            messageDom.appendChild(dateDom);
+
+            messagesDom.appendChild(messageDom);
+          });
+        };
+
         threadDom.appendChild(recipientsDom);
         threadDom.appendChild(messagePreviewDom);
         threadDom.appendChild(dateDom);
