@@ -107,6 +107,7 @@ client.on('data', function (data) {
             messagesDom.appendChild(messageDom);
           });
 
+          messagesDom.scrollTop = messagesDom.scrollHeight;
           messagesDom.threadId = this.id;
         };
 
