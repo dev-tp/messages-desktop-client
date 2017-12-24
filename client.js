@@ -134,3 +134,7 @@ client.on('data', function (data) {
 });
 
 client.on('error', console.log);
+
+document.getElementById('composed-message').onkeyup = function () {
+  document.getElementById('send-button').disabled = this.value.length === 0;
+};
