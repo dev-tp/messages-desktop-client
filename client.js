@@ -75,10 +75,15 @@ client.on('data', function (data) {
         threadDom.date = lastMessage.date;
 
         threadDom.onclick = function () {
-          const date = new Date();
-
           const messagesDom = document.getElementById('message-container');
+
+          if (messagesDom.threadId === this.id) {
+            return;
+          }
+
           messagesDom.innerHTML = '';
+
+          const date = new Date();
 
           database[this.id].messages.forEach(function (message) {
             const messageDom = document.createElement('div');
@@ -101,6 +106,8 @@ client.on('data', function (data) {
 
             messagesDom.appendChild(messageDom);
           });
+
+          messagesDom.threadId = this.id;
         };
 
         threadDom.appendChild(recipientsDom);
