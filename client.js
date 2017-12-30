@@ -138,3 +138,21 @@ client.on('error', console.log);
 document.getElementById('composed-message').onkeyup = function () {
   document.getElementById('send-button').disabled = this.value.length === 0;
 };
+
+document.getElementById('send-button').onclick = function () {
+  const composedMessageDom = document.getElementById('composed-message');
+  const threadId = document.getElementById('message-container').threadId;
+
+  const message = {};
+
+  message[threadId] = {
+    address: null,
+    body: composedMessageDom.value,
+    date: new Date().getTime(),
+  };
+
+  console.log(JSON.stringify(message));
+
+  composedMessageDom.value = '';
+  this.disabled = true;
+};
