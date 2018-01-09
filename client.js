@@ -27,7 +27,7 @@ function getReadableDate(currentDate, timestamp) {
   const time = hours + ':' + minutes;
 
   if (currentDate.getFullYear() > year) {
-    return months[month] + ' ' + day + ', ' + year;
+    return months[month] + ' ' + day + ', ' + year + ' ' + time;
   } else if (currentDay < day || day < currentDay) {
     return months[month] + ' ' + day + ' ' + time;
   }
