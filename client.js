@@ -72,6 +72,7 @@ client.on('data', function (data) {
         dateDom.classList.add('date');
         dateDom.innerText = getReadableDate(date, lastMessage.date);
 
+        threadDom.address = database[key].address;
         threadDom.date = lastMessage.date;
 
         threadDom.onclick = function () {
@@ -107,6 +108,7 @@ client.on('data', function (data) {
             messagesDom.appendChild(messageDom);
           });
 
+          messagesDom.address = this.address;
           messagesDom.scrollTop = messagesDom.scrollHeight;
           messagesDom.threadId = this.id;
         };
@@ -141,12 +143,12 @@ document.getElementById('composed-message').onkeyup = function () {
 
 document.getElementById('send-button').onclick = function () {
   const composedMessageDom = document.getElementById('composed-message');
-  const threadId = document.getElementById('message-container').threadId;
+  const messagesDom = document.getElementById('message-container');
 
   const message = {};
 
-  message[threadId] = {
-    address: null,
+  message[messagesDom.threadId] = {
+    address: messagesDom.address,
     body: composedMessageDom.value,
     date: new Date().getTime(),
   };
