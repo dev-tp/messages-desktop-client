@@ -57,9 +57,9 @@ client.on('data', function (data) {
         threadDom.classList.add('thread');
         threadDom.id = key;
 
-        const recipientsDom = document.createElement('h1');
-        recipientsDom.classList.add('recipients');
-        recipientsDom.innerText = database[key].recipients.join(', ');
+        const addressDom = document.createElement('h1');
+        addressDom.classList.add('address');
+        addressDom.innerText = database[key].address;
 
         const lastMessageIndex = database[key].messages.length - 1;
         const lastMessage = database[key].messages[lastMessageIndex];
@@ -111,7 +111,7 @@ client.on('data', function (data) {
           messagesDom.threadId = this.id;
         };
 
-        threadDom.appendChild(recipientsDom);
+        threadDom.appendChild(addressDom);
         threadDom.appendChild(messagePreviewDom);
         threadDom.appendChild(dateDom);
 
